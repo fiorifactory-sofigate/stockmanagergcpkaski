@@ -1,0 +1,24 @@
+steps:
+#build docker container
+- name: 'gcr.io/sandboxsg2/stockmanagergcp'
+  args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/stockmanagergcp', '.']
+  
+#push container to container registry
+- name: 'gcr.io/sandboxsg2/stockmanagergcp'
+  args: [ 'push', 'gcr.io/$PROJECT_ID/stockmanagergcp']
+  
+#deploy to cloud run
+- name: 'gcr.io/sandboxsg2/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'cloudrunservice'
+  - '--image'
+  - 'gcr.io/$PROJECT_ID/stockmanagergcp'
+  - '--region'
+  - 'eu-west3'
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
+images:
+  - 'gcr.io/$PROJECT_ID/stockmanagergcp'
