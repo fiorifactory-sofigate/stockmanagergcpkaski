@@ -202,7 +202,7 @@ const FocusableCell = ({ onClick, ...restProps }) => (
 
 
   return (<div>
-   <h1> Product Stock Manager</h1>
+   <h1> Stock Manager Demo</h1>
    <Card>
         <CardBody className="iq-card-body">
                         <Grid
